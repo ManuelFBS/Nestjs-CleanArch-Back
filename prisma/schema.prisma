@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url           = "mysql://${env('DB_USER')}:${env('DB_PASSWORD')}@localhost:${env('DB_PORT')}/${env('DB_NAME')}"
+}
+
+model Employee {
+  id    Int    @id @default(autoincrement())
+  dni   String    @unique @db.VarChar(20)
+  name    String    @db.VarChar(100)
+  lastName    String    @db.VarChar(100)
+  email   String    @unique
+  phone   String    @db.VarChar(30)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user    User?
+}
+
+model User {
+  id    Int   @id @default(autoincrement())
+  dni   String    @unique @db.VarChar(20)
+  username    String    @unique @db.VarChar(12)
+  password    String    @db.VarChar(100)
+  role    Role    @default(Employee)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  employee    Employee    @relation(fields: [dni], references: [dni], onDelete: Cascade, onUpdate: Cascade)
+}
+
+enum Role {
+  Owner
+  Admin
+  Employee
+}
