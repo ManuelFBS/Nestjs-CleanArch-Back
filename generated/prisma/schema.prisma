@@ -11,7 +11,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://${env('DB_USER')}:${env('DB_PASSWORD')}@localhost:${env('DB_PORT')}/${env('DB_NAME')}"
+  url      = env("DATABASE_URL")
 }
 
 model Employee {

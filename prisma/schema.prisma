@@ -11,30 +11,30 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url           = "mysql://${env('DB_USER')}:${env('DB_PASSWORD')}@localhost:${env('DB_PORT')}/${env('DB_NAME')}"
+  url      = env("DATABASE_URL")
 }
 
 model Employee {
-  id    Int    @id @default(autoincrement())
-  dni   String    @unique @db.VarChar(20)
-  name    String    @db.VarChar(100)
-  lastName    String    @db.VarChar(100)
-  email   String    @unique
-  phone   String    @db.VarChar(30)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  user    User?
+  id        Int      @id @default(autoincrement())
+  dni       String   @unique @db.VarChar(20)
+  name      String   @db.VarChar(100)
+  lastName  String   @db.VarChar(100)
+  email     String   @unique
+  phone     String   @db.VarChar(30)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?
 }
 
 model User {
-  id    Int   @id @default(autoincrement())
-  dni   String    @unique @db.VarChar(20)
-  username    String    @unique @db.VarChar(12)
-  password    String    @db.VarChar(100)
-  role    Role    @default(Employee)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  employee    Employee    @relation(fields: [dni], references: [dni], onDelete: Cascade, onUpdate: Cascade)
+  id        Int      @id @default(autoincrement())
+  dni       String   @unique @db.VarChar(20)
+  username  String   @unique @db.VarChar(12)
+  password  String   @db.VarChar(100)
+  role      Role     @default(Employee)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  employee  Employee @relation(fields: [dni], references: [dni], onDelete: Cascade, onUpdate: Cascade)
 }
 
 enum Role {
