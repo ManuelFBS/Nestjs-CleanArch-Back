@@ -142,6 +142,11 @@ export class UserService {
                 return this.userRepository.update(id, updates);
         }
 
+        async deleteUser(id: number): Promise<void> {
+                await this.findUserByID(id);
+                await this.userRepository.delete(id);
+        }
+
         async validateUser(
                 username: string,
                 password: string,

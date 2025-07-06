@@ -54,11 +54,19 @@ export class PrismaEmployeeRepository implements EmployeeRepository {
         }
 
         async findByName(name: string): Promise<Employee[]> {
-                const employees = await this.prisma.employee.findMany({
-                        where: {
-                                name: { contains: name, mode: 'insensitive' },
-                        },
-                });
+                const employees = await this.prisma.$queryRaw<
+                        Array<{
+                                id: number;
+                                dni: string;
+                                name: string;
+                                lastName: string;
+                                email: string;
+                                phone: string;
+                                createdAt: Date;
+                                updatedAt: Date;
+                        }>
+                >`SELECT * FROM Employee WHERE LOWER(name) LIKE LOWER(${`%${name}%`})`;
+
                 return employees.map((employee) => this.toDomain(employee));
         }
 
