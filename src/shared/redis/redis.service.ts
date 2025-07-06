@@ -1,16 +1,16 @@
 import { Injectable, Inject } from '@nestjs/common';
-import Redis from 'ioredis';
+import IORedis from 'ioredis';
 import { RedisModuleOptions } from './redis.module';
 
 @Injectable()
 export class RedisService {
-        private readonly client: Redis;
+        private readonly client: IORedis;
 
         constructor(
                 @Inject('REDIS_OPTIONS')
                 private readonly options: RedisModuleOptions,
         ) {
-                this.client = new Redis({
+                this.client = new IORedis({
                         host: this.options.host,
                         port: this.options.port,
                         retryStrategy: (times) => {
@@ -28,46 +28,43 @@ export class RedisService {
                 });
         }
 
-        //* Método para establecer valores con expiración en segundos...
-        async setEx(
+        async set(
                 key: string,
                 value: string,
-                duration: number,
-        ): Promise<void> {
-                await this.client.setex(key, duration, value);
-        }
-
-        //* Método para establecer valores con expiración en milisegundos...
-        async setPx(
-                key: string,
-                value: string,
-                duration: number,
-        ): Promise<void> {
-                await this.client.set(key, value, 'PX', duration);
-        }
-
-        //* Método para establecer valores solo si no existen...
-        async setNx(key: string, value: string): Promise<boolean> {
-                const result = await this.client.set(key, value, 'NX');
-                return result === 'OK';
-        }
-
-        //* Método para establecer valores solo si ya existen...
-        async setXx(key: string, value: string): Promise<boolean> {
-                const result = await this.client.set(key, value, 'XX');
-                return result === 'OK';
-        }
-
-        //* Método básico para establecer valores...
-        async set(key: string, value: string): Promise<void> {
-                await this.client.set(key, value);
+                mode?: 'EX' | 'PX' | 'KEEPTTL',
+                duration?: number,
+        ): Promise<'OK'> {
+                if (mode === 'EX' && duration) {
+                        return this.client.set(key, value, 'EX', duration);
+                } else if (mode === 'PX' && duration) {
+                        return this.client.set(key, value, 'PX', duration);
+                } else if (mode === 'KEEPTTL') {
+                        return this.client.set(key, value, 'KEEPTTL');
+                }
+                return this.client.set(key, value);
         }
 
         async get(key: string): Promise<string | null> {
                 return this.client.get(key);
         }
 
-        async del(key: string): Promise<void> {
-                await this.client.del(key);
+        async del(key: string): Promise<number> {
+                return this.client.del(key);
+        }
+
+        async exists(key: string): Promise<number> {
+                return this.client.exists(key);
+        }
+
+        async expire(key: string, seconds: number): Promise<number> {
+                return this.client.expire(key, seconds);
+        }
+
+        async ttl(key: string): Promise<number> {
+                return this.client.ttl(key);
+        }
+
+        async disconnect(): Promise<void> {
+                await this.client.quit();
         }
 }
