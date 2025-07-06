@@ -5,10 +5,15 @@ import Redis from 'ioredis';
 export class RedisService {
         private readonly client: Redis;
 
-        constructor() {
+        constructor(options?: { host: string; port: number }) {
                 this.client = new Redis({
-                        host: process.env.REDIS_HOST || 'localhost',
-                        port: parseInt(process.env.REDIS_PORT || '6379', 10),
+                        host:
+                                options?.host ||
+                                process.env.REDIS_HOST ||
+                                'localhost',
+                        port:
+                                options?.port ||
+                                parseInt(process.env.REDIS_PORT || '6379', 10),
                 });
         }
 
