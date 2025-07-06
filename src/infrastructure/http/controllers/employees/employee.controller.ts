@@ -16,7 +16,7 @@ import {
 } from '../../../../application/dto/employees/create-employee.dto';
 import { plainToInstance } from 'class-transformer';
 
-@Controller('employees')
+@Controller('api/employees')
 export class EmployeeController {
         constructor(private readonly employeeService: EmployeeService) {}
 

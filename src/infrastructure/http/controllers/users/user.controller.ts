@@ -17,7 +17,7 @@ import {
 } from '../../../../application/dto/users/create-user.dto';
 import { plainToInstance } from 'class-transformer';
 
-@Controller('users')
+@Controller('api/users')
 export class UserController {
         constructor(private readonly userService: UserService) {}
 
