@@ -1,19 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import Redis from 'ioredis';
+import { RedisModuleOptions } from './redis.module';
 
 @Injectable()
 export class RedisService {
         private readonly client: Redis;
 
-        constructor(options?: { host: string; port: number }) {
+        constructor(
+                @Inject('REDIS_OPTIONS')
+                private readonly options: RedisModuleOptions,
+        ) {
                 this.client = new Redis({
-                        host:
-                                options?.host ||
-                                process.env.REDIS_HOST ||
-                                'localhost',
-                        port:
-                                options?.port ||
-                                parseInt(process.env.REDIS_PORT || '6379', 10),
+                        host: this.options.host,
+                        port: this.options.port,
+                        retryStrategy: (times) => {
+                                const delay = Math.min(times * 50, 2000);
+                                return delay;
+                        },
+                });
+
+                this.client.on('error', (err) => {
+                        console.error('Redis error:', err);
+                });
+
+                this.client.on('connect', () => {
+                        console.log('Connected to Redis');
                 });
         }
 

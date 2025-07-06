@@ -1,7 +1,7 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { RedisService } from './resdis.service';
+import { RedisService } from './redis.service';
 
-interface RedisModuleOptions {
+export interface RedisModuleOptions {
         host: string;
         port: number;
 }
