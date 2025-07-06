@@ -12,7 +12,7 @@ import {
         CreateUserDTO,
         UpdateUserDTO,
 } from '../../../application/dto/users/create-user.dto';
-import { UserRole } from '../../entities/users/user.entity';
+// import { UserRole } from '../../entities/users/user.entity';
 
 @Injectable()
 export class UserService {
@@ -92,6 +92,18 @@ export class UserService {
                 if (!user) {
                         throw new NotFoundException(
                                 `User with DNI ${dni} not found...`,
+                        );
+                }
+
+                return user;
+        }
+
+        async findByUsername(username: string): Promise<User> {
+                const user = await this.userRepository.findByUsername(username);
+
+                if (!user) {
+                        throw new NotFoundException(
+                                `User with DNI ${username} not found...`,
                         );
                 }
 
