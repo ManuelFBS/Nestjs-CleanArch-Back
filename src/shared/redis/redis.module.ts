@@ -4,6 +4,8 @@ import { RedisService } from './redis.service';
 export interface RedisModuleOptions {
         host: string;
         port: number;
+        db: number;
+        password: string;
 }
 
 @Global()
