@@ -1,6 +1,6 @@
 import { SetMetadata } from '@nestjs/common';
-import { Peermission } from './permission';
+import { Permission } from './permission';
 
 export const PERMISSIONS_KEY = 'permissions';
-export const Permissions = (...permissions: Peermission[]) =>
+export const Permissions = (...permissions: Permission[]) =>
         SetMetadata(PERMISSIONS_KEY, permissions);

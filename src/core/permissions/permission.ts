@@ -1,6 +1,6 @@
 import { UserRole } from '../entities/users/user.entity';
 
-export type Peermission =
+export type Permission =
         | 'employee:create'
         | 'employee:read'
         | 'employee:update'
@@ -12,7 +12,7 @@ export type Peermission =
         | 'auth:login'
         | 'auth:logout';
 
-export const RolePermissions: Record<UserRole, Peermission[]> = {
+export const RolePermissions: Record<UserRole, Permission[]> = {
         [UserRole.OWNER]: [
                 'employee:create',
                 'employee:read',
@@ -43,9 +43,6 @@ export const RolePermissions: Record<UserRole, Peermission[]> = {
         ],
 };
 
-export function hasPermission(
-        role: UserRole,
-        permission: Peermission,
-): boolean {
+export function hasPermission(role: UserRole, permission: Permission): boolean {
         return RolePermissions[role].includes(permission);
 }
