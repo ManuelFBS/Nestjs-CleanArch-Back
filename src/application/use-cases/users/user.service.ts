@@ -40,13 +40,24 @@ export class UserService {
                         );
                 }
 
-                //* 3. Encriptar la contraseña antes de guardar...
+                //* 3. Verificar que no exista otro usuario con el mismo username...
+                const existingUserByUsername =
+                        await this.userRepository.findByUsername(
+                                createUserDto.username,
+                        );
+                if (existingUserByUsername) {
+                        throw new ConflictException(
+                                `User with Username ${createUserDto.username} already exists...`,
+                        );
+                }
+
+                //* 4. Encriptar la contraseña antes de guardar...
                 const hashedPassword = await bcrypt.hash(
                         createUserDto.password,
                         10,
                 );
 
-                //* 4. Crear el objeto usuario con la contraseña encriptada...
+                //* 5. Crear el objeto usuario con la contraseña encriptada...
                 //* Nota: Los campos id, createdAt y updatedAt serán manejados por la base de datos...
                 const userToCreate = new User(
                         0, //> ID temporal, será asignado por la base de datos...
@@ -58,11 +69,11 @@ export class UserService {
                         new Date(), //> updatedAt
                 );
 
-                //* 5. Guardar el usuario en la base de datos...
+                //* 6. Guardar el usuario en la base de datos...
                 const createdUser =
                         await this.userRepository.create(userToCreate);
 
-                //* 6. Retornar el usuario creado (sin la contraseña por seguridad)
+                //* 7. Retornar el usuario creado (sin la contraseña por seguridad)
                 return createdUser;
         }
 
