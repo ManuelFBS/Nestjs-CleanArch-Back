@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { RedisModule } from './shared/redis/redis.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './modules/users/user.module';
+import { EmployeeModule } from './modules/employees/employee.module';
 import { EmployeeController } from './infrastructure/http/controllers/employees/employee.controller';
 import { EmployeeService } from './core/use-cases/employees/employee.service';
 import { PrismaEmployeeRepository } from './infrastructure/repositories/employees/prisma-employee.repository';
@@ -16,6 +19,9 @@ import { PrismaUserRepository } from './infrastructure/repositories/users/prisma
                         db: parseInt(process.env.REDIS_DB || '0', 10),
                         password: process.env.REDIS_PASSWORD || '',
                 }),
+                AuthModule,
+                UserModule,
+                EmployeeModule,
         ],
         controllers: [UserController, EmployeeController],
         providers: [
