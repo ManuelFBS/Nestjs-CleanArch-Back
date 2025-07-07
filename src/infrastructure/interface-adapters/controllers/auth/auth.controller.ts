@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from '../auth.service';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
-import { LoginDTO } from '../dto/login.dto';
+import { LoginDTO } from '../../application/dto/auth/login.dto';
 import { JWTAuthGuard } from '../guards/jwt-auth.guard';
 import { Permissions } from '../../core/permissions/permissions.decorator';
 import { Permission } from '../../core/permissions/permission';

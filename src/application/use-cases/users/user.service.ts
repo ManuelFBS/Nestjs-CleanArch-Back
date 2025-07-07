@@ -4,14 +4,11 @@ import {
         ConflictException,
         NotFoundException,
 } from '@nestjs/common';
-import { User } from '../../entities/users/user.entity';
-import { UserRepository } from '../../repositories/users/user.repository';
-import { EmployeeRepository } from '../../repositories/employees/employee.repository';
+import { User } from '../../../core/entities/users/user.entity';
+import { UserRepository } from '../../../core/repositories/users/user.repository';
+import { EmployeeRepository } from '../../../core/repositories/employees/employee.repository';
 import * as bcrypt from 'bcrypt';
-import {
-        CreateUserDTO,
-        UpdateUserDTO,
-} from '../../../application/dto/users/create-user.dto';
+import { CreateUserDTO, UpdateUserDTO } from '../../dto/users/create-user.dto';
 // import { UserRole } from '../../entities/users/user.entity';
 
 @Injectable()

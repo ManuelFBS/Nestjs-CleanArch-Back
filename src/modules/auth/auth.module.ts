@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { UserModule } from '../modules/users/user.module';
-import { AuthService } from './auth.service';
-import { JWTStrategy } from './strategies/jwt.strategy';
-import { AuthController } from '../auth/controllers/auth.controller';
-import { TokenBlacklistService } from '../auth/token/token-blacklist.service';
-import { RedisModule } from '../shared/redis/redis.module';
+import { UserModule } from '../users/user.module';
+import { AuthService } from '../../application/use-cases/auth/auth.service';
+import { JWTStrategy } from '../../auth/strategies/jwt.strategy';
+import { AuthController } from '../../infrastructure/interface-adapters/controllers/auth/auth.controller';
+import { TokenBlacklistService } from '../../auth/token/token-blacklist.service';
+import { RedisModule } from '../../shared/redis/redis.module';
 
 @Module({
         imports: [

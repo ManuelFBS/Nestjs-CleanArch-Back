@@ -9,7 +9,7 @@ import {
         ParseIntPipe,
         UnauthorizedException,
 } from '@nestjs/common';
-import { UserService } from '../../../../core/use-cases/users/user.service';
+import { UserService } from '../../../../application/use-cases/users/user.service';
 import {
         CreateUserDTO,
         UpdateUserDTO,

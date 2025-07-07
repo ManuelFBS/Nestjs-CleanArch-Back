@@ -1,15 +1,8 @@
 import { Module } from '@nestjs/common';
 import { RedisModule } from './shared/redis/redis.module';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/users/user.module';
 import { EmployeeModule } from './modules/employees/employee.module';
-import { EmployeeController } from './infrastructure/http/controllers/employees/employee.controller';
-import { EmployeeService } from './core/use-cases/employees/employee.service';
-import { PrismaEmployeeRepository } from './infrastructure/repositories/employees/prisma-employee.repository';
-import { UserController } from './infrastructure/http/controllers/users/user.controller';
-import { UserService } from './core/use-cases/users/user.service';
-import { PrismaService } from './infrastructure/database/prisma/prisma.service';
-import { PrismaUserRepository } from './infrastructure/repositories/users/prisma-user.repository';
 
 @Module({
         imports: [
@@ -23,19 +16,6 @@ import { PrismaUserRepository } from './infrastructure/repositories/users/prisma
                 UserModule,
                 EmployeeModule,
         ],
-        controllers: [UserController, EmployeeController],
-        providers: [
-                UserService,
-                EmployeeService,
-                PrismaService,
-                {
-                        provide: 'UserRepository',
-                        useClass: PrismaUserRepository,
-                },
-                {
-                        provide: 'EmployeeRepository',
-                        useClass: PrismaEmployeeRepository,
-                },
-        ],
+        //? No se necesitan controllers ni providers aquí si ya están en los módulos...
 })
 export class AppModule {}

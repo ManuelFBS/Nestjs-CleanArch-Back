@@ -8,7 +8,7 @@ import {
         Delete,
         ParseIntPipe,
 } from '@nestjs/common';
-import { EmployeeService } from '../../../../core/use-cases/employees/employee.service';
+import { EmployeeService } from '../../../../application/use-cases/employees/employee.service';
 import {
         CreateEmployeeDTO,
         UpdateEmployeeDTO,

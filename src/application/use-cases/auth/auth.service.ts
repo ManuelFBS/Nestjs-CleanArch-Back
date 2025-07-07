@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../core/use-cases/users/user.service';
-import { User } from '../core/entities/users/user.entity';
-import { JWTPayload } from './interfaces/jwt-payload.interface';
+import { UserService } from '../users/user.service';
+import { User } from '../../../core/entities/users/user.entity';
+import { JWTPayload } from '../../../auth/interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
-import { TokenBlacklistService } from './token/token-blacklist.service';
+import { TokenBlacklistService } from '../../../auth/token/token-blacklist.service';
 
 @Injectable()
 export class AuthService {
@@ -52,16 +52,6 @@ export class AuthService {
         }
 
         async logout(token: string): Promise<void> {
-                const decoded = this.jwtService.decode(token);
-                if (
-                        decoded &&
-                        typeof decoded === 'object' &&
-                        'exp' in decoded
-                ) {
-                        await this.tokenBlacklist.addToBlacklist(
-                                token,
-                                decoded.exp as number,
-                        );
-                }
+                await this.tokenBlacklist.addToBlacklist(token);
         }
 }
