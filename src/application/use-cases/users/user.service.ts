@@ -5,8 +5,8 @@ import {
         NotFoundException,
 } from '@nestjs/common';
 import { User } from '../../../core/entities/users/user.entity';
-import { UserRepository } from '../../../core/repositories/users/user.repository';
-import { EmployeeRepository } from '../../../core/repositories/employees/employee.repository';
+import { PrismaUserRepository } from 'src/infrastructure/repositories/users/prisma-user.repository';
+import { PrismaEmployeeRepository } from 'src/infrastructure/repositories/employees/prisma-employee.repository';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDTO, UpdateUserDTO } from '../../dto/users/create-user.dto';
 
@@ -14,9 +14,9 @@ import { CreateUserDTO, UpdateUserDTO } from '../../dto/users/create-user.dto';
 export class UserService {
         constructor(
                 @Inject('UserRepository')
-                private readonly userRepository: UserRepository,
+                private readonly userRepository: PrismaUserRepository,
                 @Inject('EmployeeRepository')
-                private readonly employeeRepository: EmployeeRepository,
+                private readonly employeeRepository: PrismaEmployeeRepository,
         ) {}
 
         async createUser(createUserDto: CreateUserDTO): Promise<User> {
