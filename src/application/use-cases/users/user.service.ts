@@ -9,7 +9,6 @@ import { UserRepository } from '../../../core/repositories/users/user.repository
 import { EmployeeRepository } from '../../../core/repositories/employees/employee.repository';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDTO, UpdateUserDTO } from '../../dto/users/create-user.dto';
-// import { UserRole } from '../../entities/users/user.entity';
 
 @Injectable()
 export class UserService {
