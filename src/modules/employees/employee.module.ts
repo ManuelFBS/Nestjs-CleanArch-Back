@@ -14,6 +14,6 @@ import { PrismaEmployeeRepository } from '../../infrastructure/repositories/empl
                         useClass: PrismaEmployeeRepository,
                 },
         ],
-        exports: [EmployeeService],
+        exports: [EmployeeService, 'EmployeeRepository'],
 })
 export class EmployeeModule {}
