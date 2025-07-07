@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
         IsString,
         MinLength,
         MaxLength,
         Matches,
-        IsEnum,
         IsOptional,
         IsNotEmpty,
         Validate,
