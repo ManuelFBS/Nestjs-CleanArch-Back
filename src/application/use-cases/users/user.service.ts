@@ -47,15 +47,15 @@ export class UserService {
                 );
 
                 //* 4. Crear el objeto usuario con la contraseña encriptada...
-                //> Nota: Los campos id, createdAt y updatedAt serán manejados por la base de datos...
+                //* Nota: Los campos id, createdAt y updatedAt serán manejados por la base de datos...
                 const userToCreate = new User(
-                        0, // ID temporal, será asignado por la base de datos
+                        0, //> ID temporal, será asignado por la base de datos...
                         createUserDto.dni,
                         createUserDto.username,
                         hashedPassword,
                         createUserDto.role,
-                        new Date(), // createdAt
-                        new Date(), // updatedAt
+                        new Date(), //> createdAt
+                        new Date(), //> updatedAt
                 );
 
                 //* 5. Guardar el usuario en la base de datos...
