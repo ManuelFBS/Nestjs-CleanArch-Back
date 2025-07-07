@@ -5,7 +5,7 @@ import {
         Inject,
 } from '@nestjs/common';
 import { Employee } from '../../../core/entities/employees/employee.entity';
-import { PrismaEmployeeRepository } from 'src/infrastructure/repositories/employees/prisma-employee.repository';
+import { EmployeeRepository } from '../../../core/repositories/employees/employee.repository';
 import {
         CreateEmployeeDTO,
         UpdateEmployeeDTO,
@@ -15,7 +15,7 @@ import {
 export class EmployeeService {
         constructor(
                 @Inject('EmployeeRepository')
-                private readonly prismaEmployeeRepository: PrismaEmployeeRepository,
+                private readonly employeeRepository: EmployeeRepository,
         ) {}
 
         async createEmployee(
@@ -23,7 +23,7 @@ export class EmployeeService {
         ): Promise<Employee> {
                 //* Validar DNI único...
                 if (
-                        await this.prismaEmployeeRepository.existsWithDni(
+                        await this.employeeRepository.existsWithDni(
                                 createEmployeeDTO.dni,
                         )
                 ) {
@@ -34,7 +34,7 @@ export class EmployeeService {
 
                 //* Validar email único...
                 if (
-                        await this.prismaEmployeeRepository.existsWithEmail(
+                        await this.employeeRepository.existsWithEmail(
                                 createEmployeeDTO.email,
                         )
                 ) {
@@ -54,16 +54,15 @@ export class EmployeeService {
                         new Date(),
                 );
 
-                return this.prismaEmployeeRepository.create(employee);
+                return this.employeeRepository.create(employee);
         }
 
         async findAllEmployees(): Promise<Employee[]> {
-                return this.prismaEmployeeRepository.findAll();
+                return this.employeeRepository.findAll();
         }
 
         async findEmployeeById(id: number): Promise<Employee> {
-                const employee =
-                        await this.prismaEmployeeRepository.findByID(id);
+                const employee = await this.employeeRepository.findByID(id);
                 if (!employee) {
                         throw new NotFoundException(
                                 `Empleado con ID ${id} no encontrado`,
@@ -82,7 +81,7 @@ export class EmployeeService {
                 //* Validar email único si se está actualizando...
                 if (
                         updateEmployeeDto.email &&
-                        (await this.prismaEmployeeRepository.existsWithEmail(
+                        (await this.employeeRepository.existsWithEmail(
                                 updateEmployeeDto.email,
                         ))
                 ) {
@@ -91,21 +90,17 @@ export class EmployeeService {
                         );
                 }
 
-                return this.prismaEmployeeRepository.update(
-                        id,
-                        updateEmployeeDto,
-                );
+                return this.employeeRepository.update(id, updateEmployeeDto);
         }
 
         async deleteEmployee(id: number): Promise<void> {
                 //* Verificar existencia...
                 await this.findEmployeeById(id);
-                await this.prismaEmployeeRepository.delete(id);
+                await this.employeeRepository.delete(id);
         }
 
         async findEmployeeByDni(dni: string): Promise<Employee> {
-                const employee =
-                        await this.prismaEmployeeRepository.findByDNI(dni);
+                const employee = await this.employeeRepository.findByDNI(dni);
 
                 if (!employee) {
                         throw new NotFoundException(
