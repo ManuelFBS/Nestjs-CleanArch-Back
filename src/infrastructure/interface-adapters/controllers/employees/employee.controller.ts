@@ -7,6 +7,7 @@ import {
         Put,
         Delete,
         ParseIntPipe,
+        UseGuards,
 } from '@nestjs/common';
 import { EmployeeService } from '../../../../application/use-cases/employees/employee.service';
 import {
@@ -14,6 +15,8 @@ import {
         UpdateEmployeeDTO,
         EmployeeResponseDTO,
 } from '../../../../application/dto/employees/create-employee.dto';
+import { JWTAuthGuard } from '../../../../auth/guards/jwt-auth.guard';
+import { Permissions } from '../../../../core/permissions/permissions.decorator';
 import { plainToInstance } from 'class-transformer';
 
 @Controller('api/employees')
@@ -21,6 +24,8 @@ export class EmployeeController {
         constructor(private readonly employeeService: EmployeeService) {}
 
         @Post('employee/newemp')
+        @UseGuards(JWTAuthGuard)
+        @Permissions('employee:create')
         async create(
                 @Body() createEmployeeDTO: CreateEmployeeDTO,
         ): Promise<EmployeeResponseDTO> {
@@ -33,6 +38,8 @@ export class EmployeeController {
         }
 
         @Get()
+        @UseGuards(JWTAuthGuard)
+        @Permissions('employee:read')
         async findAll(): Promise<EmployeeResponseDTO[]> {
                 const employees = await this.employeeService.findAllEmployees();
 
@@ -40,6 +47,8 @@ export class EmployeeController {
         }
 
         @Get('employeebyid/:id')
+        @UseGuards(JWTAuthGuard)
+        @Permissions('employee:create', 'employee:read')
         async findOne(
                 @Param('id', ParseIntPipe) id: number,
         ): Promise<EmployeeResponseDTO> {
@@ -50,6 +59,8 @@ export class EmployeeController {
         }
 
         @Get('employeebydni/:dni')
+        @UseGuards(JWTAuthGuard)
+        @Permissions('employee:create', 'employee:read')
         async findByDNI(
                 @Param('dni') dni: string,
         ): Promise<EmployeeResponseDTO> {
@@ -60,6 +71,8 @@ export class EmployeeController {
         }
 
         @Put('employeeupdate/:id')
+        @UseGuards(JWTAuthGuard)
+        @Permissions('employee:create', 'employee:read', 'employee:update')
         async update(
                 @Param('id', ParseIntPipe) id: number,
                 @Body() updateEmployeeDTO: UpdateEmployeeDTO,
@@ -72,6 +85,8 @@ export class EmployeeController {
         }
 
         @Delete('employeedel/:id')
+        @UseGuards(JWTAuthGuard)
+        @Permissions('employee:create', 'employee:read', 'employee:delete')
         async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
                 await this.employeeService.deleteEmployee(id);
         }
