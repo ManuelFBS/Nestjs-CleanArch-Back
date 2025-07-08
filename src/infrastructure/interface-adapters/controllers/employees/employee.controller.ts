@@ -17,6 +17,7 @@ import {
 } from '../../../../application/dto/employees/create-employee.dto';
 import { JWTAuthGuard } from '../../../../auth/guards/jwt-auth.guard';
 import { Permissions } from '../../../../core/permissions/permissions.decorator';
+import { PermissionsGuard } from '../../../../auth/guards/permissions.guard';
 import { plainToInstance } from 'class-transformer';
 
 @Controller('api/employees')
@@ -24,7 +25,7 @@ export class EmployeeController {
         constructor(private readonly employeeService: EmployeeService) {}
 
         @Post('employee/newemp')
-        @UseGuards(JWTAuthGuard)
+        @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:create')
         async create(
                 @Body() createEmployeeDTO: CreateEmployeeDTO,
