@@ -11,12 +11,6 @@ import { EmployeeModule } from './modules/employees/employee.module';
                         isGlobal: true,
                         envFilePath: '.env',
                 }),
-                // RedisModule.forRoot({
-                // host: process.env.REDIS_HOST || 'localhost',
-                // port: parseInt(process.env.REDIS_PORT || '6379', 10),
-                // db: parseInt(process.env.REDIS_DB || '0', 10),
-                // password: process.env.REDIS_PASSWORD || '',
-                // }),
                 RedisModule.forRootAsync({
                         inject: [ConfigService],
                         useFactory: (configService: ConfigService) => ({
