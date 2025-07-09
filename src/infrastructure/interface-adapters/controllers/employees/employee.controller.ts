@@ -6,8 +6,8 @@ import {
         Param,
         Put,
         Delete,
-        ParseIntPipe,
         UseGuards,
+        ParseIntPipe,
 } from '@nestjs/common';
 import { EmployeeService } from '../../../../application/use-cases/employees/employee.service';
 import {
@@ -39,7 +39,7 @@ export class EmployeeController {
         }
 
         @Get()
-        @UseGuards(JWTAuthGuard)
+        @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:read')
         async findAll(): Promise<EmployeeResponseDTO[]> {
                 const employees = await this.employeeService.findAllEmployees();
@@ -48,7 +48,7 @@ export class EmployeeController {
         }
 
         @Get('employeebyid/:id')
-        @UseGuards(JWTAuthGuard)
+        @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:create', 'employee:read')
         async findOne(
                 @Param('id', ParseIntPipe) id: number,
@@ -60,7 +60,7 @@ export class EmployeeController {
         }
 
         @Get('employeebydni/:dni')
-        @UseGuards(JWTAuthGuard)
+        @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:create', 'employee:read')
         async findByDNI(
                 @Param('dni') dni: string,
@@ -72,7 +72,7 @@ export class EmployeeController {
         }
 
         @Put('employeeupdate/:id')
-        @UseGuards(JWTAuthGuard)
+        @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:create', 'employee:read', 'employee:update')
         async update(
                 @Param('id', ParseIntPipe) id: number,
@@ -86,7 +86,7 @@ export class EmployeeController {
         }
 
         @Delete('employeedel/:id')
-        @UseGuards(JWTAuthGuard)
+        @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:create', 'employee:read', 'employee:delete')
         async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
                 await this.employeeService.deleteEmployee(id);

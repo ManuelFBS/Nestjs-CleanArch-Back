@@ -16,6 +16,9 @@ async function bootstrap() {
 
         SwaggerModule.setup('api', app, document);
 
+        console.log('REDIS_HOST:', process.env.REDIS_HOST);
+        console.log('REDIS_PORT:', process.env.REDIS_PORT);
+
         await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
