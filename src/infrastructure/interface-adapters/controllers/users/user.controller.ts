@@ -14,11 +14,13 @@ import {
         CreateUserDTO,
         UpdateUserDTO,
         UserResponseDTO,
+        UserPublicResponseDTO,
 } from '../../../../application/dto/users/create-user.dto';
 import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Permissions } from '../../../../core/permissions/permissions.decorator';
 import { PermissionsGuard } from '../../../../auth/guards/permissions.guard';
 import { plainToInstance } from 'class-transformer';
+import { rootCertificates } from 'tls';
 
 @Controller('api/users')
 export class UserController {
@@ -38,10 +40,20 @@ export class UserController {
         @Get()
         @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('user:read')
-        async findAll(): Promise<UserResponseDTO[]> {
+        async findAll(): Promise<UserPublicResponseDTO[]> {
                 const users = await this.userService.findAllUsers();
 
-                return plainToInstance(UserResponseDTO, users);
+                //* Se ordena por 'username' en forma ascendente...
+                users.sort((a, b) => a.username.localeCompare(b.username));
+
+                //* Se mapea y (opcionalmente) se transforma a instancia de DTO...
+                return users.map((user) =>
+                        plainToInstance(UserPublicResponseDTO, {
+                                dni: user.dni,
+                                username: user.username,
+                                role: user.role,
+                        }),
+                );
         }
 
         @Get('userbyid/:id')

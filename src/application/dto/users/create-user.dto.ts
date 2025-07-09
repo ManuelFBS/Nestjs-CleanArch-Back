@@ -140,15 +140,13 @@ export class UserResponseDTO {
         updatedAt: Date;
 }
 
-//~ DTO para el Login...
-// export class LoginUserDTO {
-//         @ApiProperty({ example: 'pedropaz', description: 'Nombre de usuario' })
-//         @IsString()
-//         @IsNotEmpty()
-//         username: string;
+export class UserPublicResponseDTO {
+        @ApiProperty({ example: '12345678', description: 'DNI del usuario' })
+        dni: string;
 
-//         @ApiProperty({ example: 'P@ssw0rd', description: 'Contraseña' })
-//         @IsString()
-//         @IsNotEmpty()
-//         password: string;
-// }
+        @ApiProperty({ example: 'johndoe', description: 'Nombre de usuario' })
+        username: string;
+
+        @ApiProperty({ enum: UserRole, example: UserRole.EMPLOYEE })
+        role: UserRole;
+}
