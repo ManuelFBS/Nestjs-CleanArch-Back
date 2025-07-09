@@ -152,7 +152,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Jobs\\Practice Projects\\Nestjs_and_TS_Clean_Architecture\\nestjs-clean-arch-back\\generated\\client",
+      "value": "C:\\MFBS\\Trabajo\\Learning\\Clean_Architecture_And_Nest_TS\\Nestjs-CleanArch-Back\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -166,7 +166,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Jobs\\Practice Projects\\Nestjs_and_TS_Clean_Architecture\\nestjs-clean-arch-back\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\MFBS\\Trabajo\\Learning\\Clean_Architecture_And_Nest_TS\\Nestjs-CleanArch-Back\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

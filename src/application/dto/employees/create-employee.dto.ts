@@ -110,3 +110,20 @@ export class EmployeeResponseDTO {
         @ApiProperty()
         updatedAt: Date;
 }
+
+export class EmployeePublicResponseDTO {
+        @ApiProperty()
+        dni: string;
+
+        @ApiProperty()
+        name: string;
+
+        @ApiProperty()
+        lastName: string;
+
+        @ApiProperty()
+        email: string;
+
+        @ApiProperty()
+        phone: string;
+}

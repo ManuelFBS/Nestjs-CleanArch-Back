@@ -14,6 +14,7 @@ import {
         CreateEmployeeDTO,
         UpdateEmployeeDTO,
         EmployeeResponseDTO,
+        EmployeePublicResponseDTO,
 } from '../../../../application/dto/employees/create-employee.dto';
 import { JWTAuthGuard } from '../../../../auth/guards/jwt-auth.guard';
 import { Permissions } from '../../../../core/permissions/permissions.decorator';
@@ -41,10 +42,22 @@ export class EmployeeController {
         @Get()
         @UseGuards(JWTAuthGuard, PermissionsGuard)
         @Permissions('employee:read')
-        async findAll(): Promise<EmployeeResponseDTO[]> {
+        async findAll(): Promise<EmployeePublicResponseDTO[]> {
                 const employees = await this.employeeService.findAllEmployees();
 
-                return plainToInstance(EmployeeResponseDTO, employees);
+                //* Se ordena por 'dni' en forma ascendente...
+                employees.sort((a, b) => Number(a.dni) - Number(b.dni));
+
+                //* Se mapea y (opcionalmente) se transforma a instancia de DTO...
+                return employees.map((emp) =>
+                        plainToInstance(EmployeePublicResponseDTO, {
+                                dni: emp.dni,
+                                name: emp.name,
+                                lastName: emp.lastName,
+                                email: emp.email,
+                                phone: emp.phone,
+                        }),
+                );
         }
 
         @Get('employeebyid/:id')
