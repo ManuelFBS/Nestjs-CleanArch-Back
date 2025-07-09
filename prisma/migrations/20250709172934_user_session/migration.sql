@@ -5,8 +5,8 @@ CREATE TABLE `UserSession` (
     `username` VARCHAR(191) NOT NULL,
     `role` VARCHAR(191) NOT NULL,
     `initDate` DATETIME(3) NOT NULL,
-    `finalDate` DATETIME(3) NULL,
     `initHour` VARCHAR(191) NOT NULL,
+    `finalDate` DATETIME(3) NULL,
     `finalHour` VARCHAR(191) NULL,
 
     INDEX `UserSession_dni_idx`(`dni`),

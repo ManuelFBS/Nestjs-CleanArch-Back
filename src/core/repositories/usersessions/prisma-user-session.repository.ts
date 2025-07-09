@@ -5,4 +5,9 @@ export abstract class UserSessionRepository {
         abstract findAll(): Promise<UserSession[]>;
         abstract findByDNI(dni: string): Promise<UserSession | null>;
         abstract findByUsername(username: string): Promise<UserSession | null>;
+        abstract updateSessionEnd(
+                dni: string,
+                finalDate: Date,
+                finalHour: string,
+        ): Promise<UserSession>;
 }

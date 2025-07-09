@@ -50,8 +50,8 @@ model UserSession {
   username   String
   role       String
   initDate   DateTime
-  finalDate  DateTime?
   initHour   String
+  finalDate  DateTime?
   finalHour  String?
   user       User     @relation(fields: [dni], references: [dni])
 

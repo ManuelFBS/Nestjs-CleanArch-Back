@@ -147,8 +147,8 @@ exports.Prisma.UserSessionScalarFieldEnum = {
   username: 'username',
   role: 'role',
   initDate: 'initDate',
-  finalDate: 'finalDate',
   initHour: 'initHour',
+  finalDate: 'finalDate',
   finalHour: 'finalHour'
 };
 

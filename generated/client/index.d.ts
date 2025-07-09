@@ -3131,8 +3131,8 @@ export namespace Prisma {
     username: string | null
     role: string | null
     initDate: Date | null
-    finalDate: Date | null
     initHour: string | null
+    finalDate: Date | null
     finalHour: string | null
   }
 
@@ -3142,8 +3142,8 @@ export namespace Prisma {
     username: string | null
     role: string | null
     initDate: Date | null
-    finalDate: Date | null
     initHour: string | null
+    finalDate: Date | null
     finalHour: string | null
   }
 
@@ -3153,8 +3153,8 @@ export namespace Prisma {
     username: number
     role: number
     initDate: number
-    finalDate: number
     initHour: number
+    finalDate: number
     finalHour: number
     _all: number
   }
@@ -3174,8 +3174,8 @@ export namespace Prisma {
     username?: true
     role?: true
     initDate?: true
-    finalDate?: true
     initHour?: true
+    finalDate?: true
     finalHour?: true
   }
 
@@ -3185,8 +3185,8 @@ export namespace Prisma {
     username?: true
     role?: true
     initDate?: true
-    finalDate?: true
     initHour?: true
+    finalDate?: true
     finalHour?: true
   }
 
@@ -3196,8 +3196,8 @@ export namespace Prisma {
     username?: true
     role?: true
     initDate?: true
-    finalDate?: true
     initHour?: true
+    finalDate?: true
     finalHour?: true
     _all?: true
   }
@@ -3294,8 +3294,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date
-    finalDate: Date | null
     initHour: string
+    finalDate: Date | null
     finalHour: string | null
     _count: UserSessionCountAggregateOutputType | null
     _avg: UserSessionAvgAggregateOutputType | null
@@ -3324,8 +3324,8 @@ export namespace Prisma {
     username?: boolean
     role?: boolean
     initDate?: boolean
-    finalDate?: boolean
     initHour?: boolean
+    finalDate?: boolean
     finalHour?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userSession"]>
@@ -3338,12 +3338,12 @@ export namespace Prisma {
     username?: boolean
     role?: boolean
     initDate?: boolean
-    finalDate?: boolean
     initHour?: boolean
+    finalDate?: boolean
     finalHour?: boolean
   }
 
-  export type UserSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dni" | "username" | "role" | "initDate" | "finalDate" | "initHour" | "finalHour", ExtArgs["result"]["userSession"]>
+  export type UserSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dni" | "username" | "role" | "initDate" | "initHour" | "finalDate" | "finalHour", ExtArgs["result"]["userSession"]>
   export type UserSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3359,8 +3359,8 @@ export namespace Prisma {
       username: string
       role: string
       initDate: Date
-      finalDate: Date | null
       initHour: string
+      finalDate: Date | null
       finalHour: string | null
     }, ExtArgs["result"]["userSession"]>
     composites: {}
@@ -3737,8 +3737,8 @@ export namespace Prisma {
     readonly username: FieldRef<"UserSession", 'String'>
     readonly role: FieldRef<"UserSession", 'String'>
     readonly initDate: FieldRef<"UserSession", 'DateTime'>
-    readonly finalDate: FieldRef<"UserSession", 'DateTime'>
     readonly initHour: FieldRef<"UserSession", 'String'>
+    readonly finalDate: FieldRef<"UserSession", 'DateTime'>
     readonly finalHour: FieldRef<"UserSession", 'String'>
   }
     
@@ -4148,8 +4148,8 @@ export namespace Prisma {
     username: 'username',
     role: 'role',
     initDate: 'initDate',
-    finalDate: 'finalDate',
     initHour: 'initHour',
+    finalDate: 'finalDate',
     finalHour: 'finalHour'
   };
 
@@ -4399,8 +4399,8 @@ export namespace Prisma {
     username?: StringFilter<"UserSession"> | string
     role?: StringFilter<"UserSession"> | string
     initDate?: DateTimeFilter<"UserSession"> | Date | string
-    finalDate?: DateTimeNullableFilter<"UserSession"> | Date | string | null
     initHour?: StringFilter<"UserSession"> | string
+    finalDate?: DateTimeNullableFilter<"UserSession"> | Date | string | null
     finalHour?: StringNullableFilter<"UserSession"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -4411,8 +4411,8 @@ export namespace Prisma {
     username?: SortOrder
     role?: SortOrder
     initDate?: SortOrder
-    finalDate?: SortOrderInput | SortOrder
     initHour?: SortOrder
+    finalDate?: SortOrderInput | SortOrder
     finalHour?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: UserSessionOrderByRelevanceInput
@@ -4427,8 +4427,8 @@ export namespace Prisma {
     username?: StringFilter<"UserSession"> | string
     role?: StringFilter<"UserSession"> | string
     initDate?: DateTimeFilter<"UserSession"> | Date | string
-    finalDate?: DateTimeNullableFilter<"UserSession"> | Date | string | null
     initHour?: StringFilter<"UserSession"> | string
+    finalDate?: DateTimeNullableFilter<"UserSession"> | Date | string | null
     finalHour?: StringNullableFilter<"UserSession"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -4439,8 +4439,8 @@ export namespace Prisma {
     username?: SortOrder
     role?: SortOrder
     initDate?: SortOrder
-    finalDate?: SortOrderInput | SortOrder
     initHour?: SortOrder
+    finalDate?: SortOrderInput | SortOrder
     finalHour?: SortOrderInput | SortOrder
     _count?: UserSessionCountOrderByAggregateInput
     _avg?: UserSessionAvgOrderByAggregateInput
@@ -4458,8 +4458,8 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"UserSession"> | string
     role?: StringWithAggregatesFilter<"UserSession"> | string
     initDate?: DateTimeWithAggregatesFilter<"UserSession"> | Date | string
-    finalDate?: DateTimeNullableWithAggregatesFilter<"UserSession"> | Date | string | null
     initHour?: StringWithAggregatesFilter<"UserSession"> | string
+    finalDate?: DateTimeNullableWithAggregatesFilter<"UserSession"> | Date | string | null
     finalHour?: StringNullableWithAggregatesFilter<"UserSession"> | string | null
   }
 
@@ -4615,8 +4615,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date | string
-    finalDate?: Date | string | null
     initHour: string
+    finalDate?: Date | string | null
     finalHour?: string | null
     user: UserCreateNestedOneWithoutSessionsInput
   }
@@ -4627,8 +4627,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date | string
-    finalDate?: Date | string | null
     initHour: string
+    finalDate?: Date | string | null
     finalHour?: string | null
   }
 
@@ -4636,8 +4636,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSessionsNestedInput
   }
@@ -4648,8 +4648,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -4659,8 +4659,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date | string
-    finalDate?: Date | string | null
     initHour: string
+    finalDate?: Date | string | null
     finalHour?: string | null
   }
 
@@ -4668,8 +4668,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -4679,8 +4679,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -4945,8 +4945,8 @@ export namespace Prisma {
     username?: SortOrder
     role?: SortOrder
     initDate?: SortOrder
-    finalDate?: SortOrder
     initHour?: SortOrder
+    finalDate?: SortOrder
     finalHour?: SortOrder
   }
 
@@ -4960,8 +4960,8 @@ export namespace Prisma {
     username?: SortOrder
     role?: SortOrder
     initDate?: SortOrder
-    finalDate?: SortOrder
     initHour?: SortOrder
+    finalDate?: SortOrder
     finalHour?: SortOrder
   }
 
@@ -4971,8 +4971,8 @@ export namespace Prisma {
     username?: SortOrder
     role?: SortOrder
     initDate?: SortOrder
-    finalDate?: SortOrder
     initHour?: SortOrder
+    finalDate?: SortOrder
     finalHour?: SortOrder
   }
 
@@ -5408,8 +5408,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date | string
-    finalDate?: Date | string | null
     initHour: string
+    finalDate?: Date | string | null
     finalHour?: string | null
   }
 
@@ -5418,8 +5418,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date | string
-    finalDate?: Date | string | null
     initHour: string
+    finalDate?: Date | string | null
     finalHour?: string | null
   }
 
@@ -5490,8 +5490,8 @@ export namespace Prisma {
     username?: StringFilter<"UserSession"> | string
     role?: StringFilter<"UserSession"> | string
     initDate?: DateTimeFilter<"UserSession"> | Date | string
-    finalDate?: DateTimeNullableFilter<"UserSession"> | Date | string | null
     initHour?: StringFilter<"UserSession"> | string
+    finalDate?: DateTimeNullableFilter<"UserSession"> | Date | string | null
     finalHour?: StringNullableFilter<"UserSession"> | string | null
   }
 
@@ -5554,8 +5554,8 @@ export namespace Prisma {
     username: string
     role: string
     initDate: Date | string
-    finalDate?: Date | string | null
     initHour: string
+    finalDate?: Date | string | null
     finalHour?: string | null
   }
 
@@ -5563,8 +5563,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5573,8 +5573,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -5583,8 +5583,8 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     initDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     initHour?: StringFieldUpdateOperationsInput | string
+    finalDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finalHour?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
