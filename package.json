@@ -11,6 +11,7 @@
                 "dev": "prisma generate && npm run start:dev",
                 "build": "nest build",
                 "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+                "format:prisma": "prisma format",
                 "prisma:migrate": "prisma migrate dev",
                 "prisma:generate": "prisma generate",
                 "start:debug": "nest start --debug --watch",

@@ -141,6 +141,17 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserSessionScalarFieldEnum = {
+  id: 'id',
+  dni: 'dni',
+  username: 'username',
+  role: 'role',
+  initDate: 'initDate',
+  finalDate: 'finalDate',
+  initHour: 'initHour',
+  finalHour: 'finalHour'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -159,6 +170,19 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   username: 'username',
   password: 'password'
 };
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.UserSessionOrderByRelevanceFieldEnum = {
+  dni: 'dni',
+  username: 'username',
+  role: 'role',
+  initHour: 'initHour',
+  finalHour: 'finalHour'
+};
 exports.Role = exports.$Enums.Role = {
   Owner: 'Owner',
   Admin: 'Admin',
@@ -167,7 +191,8 @@ exports.Role = exports.$Enums.Role = {
 
 exports.Prisma.ModelName = {
   Employee: 'Employee',
-  User: 'User'
+  User: 'User',
+  UserSession: 'UserSession'
 };
 
 /**
