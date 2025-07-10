@@ -10,7 +10,8 @@ export type Permission =
         | 'user:update'
         | 'user:delete'
         | 'auth:login'
-        | 'auth:logout';
+        | 'auth:logout'
+        | 'sessions:read';
 
 export const RolePermissions: Record<UserRole, Permission[]> = {
         [UserRole.OWNER]: [
@@ -24,6 +25,7 @@ export const RolePermissions: Record<UserRole, Permission[]> = {
                 'user:delete',
                 'auth:login',
                 'auth:logout',
+                'sessions:read',
         ],
         [UserRole.ADMIN]: [
                 'employee:create',
@@ -34,12 +36,14 @@ export const RolePermissions: Record<UserRole, Permission[]> = {
                 'user:update',
                 'auth:login',
                 'auth:logout',
+                'sessions:read',
         ],
         [UserRole.EMPLOYEE]: [
                 'employee:read',
                 'user:read',
                 'auth:login',
                 'auth:logout',
+                'sessions:read',
         ],
 };
 

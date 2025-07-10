@@ -7,6 +7,7 @@ import { JWTStrategy } from '../../auth/strategies/jwt.strategy';
 import { AuthController } from '../../infrastructure/interface-adapters/controllers/auth/auth.controller';
 import { TokenBlacklistService } from '../../auth/token/token-blacklist.service';
 import { RedisModule } from '../../shared/redis/redis.module';
+import { UserSessionModule } from '../usersessions/user-session.module';
 
 @Module({
         imports: [
@@ -19,6 +20,7 @@ import { RedisModule } from '../../shared/redis/redis.module';
                 }),
                 UserModule,
                 RedisModule,
+                UserSessionModule,
         ],
         providers: [AuthService, JWTStrategy, TokenBlacklistService],
         controllers: [AuthController],

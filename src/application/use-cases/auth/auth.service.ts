@@ -5,13 +5,15 @@ import { User } from '../../../core/entities/users/user.entity';
 import { JWTPayload } from '../../../auth/interfaces/jwt-payload.interface';
 import * as bcrypt from 'bcrypt';
 import { TokenBlacklistService } from '../../../auth/token/token-blacklist.service';
-
+import { UserSessionService } from '../usersessions/user-session.service';
+import { CreateUserSessionDTO } from '../../dto/usersessions/create-user-session.dto';
 @Injectable()
 export class AuthService {
         constructor(
                 private readonly userService: UserService,
                 private readonly jwtService: JwtService,
                 private readonly tokenBlacklist: TokenBlacklistService,
+                private readonly userServiceSession: UserSessionService,
         ) {}
 
         async validateUser(
@@ -41,6 +43,18 @@ export class AuthService {
                         role: user.role,
                 };
 
+                //* Crear la sesión del usuario...
+                const sessionData: CreateUserSessionDTO = {
+                        dni: user.dni,
+                        username: user.username,
+                        role: user.role,
+                        initDate: new Date().toISOString(),
+                        initHour: new Date().toLocaleTimeString(),
+                };
+
+                //* Se guarda la sesión del usuario en la BD...
+                await this.userServiceSession.createSession(sessionData);
+
                 return {
                         access_token: this.jwtService.sign(payload),
                         user: {
@@ -52,6 +66,34 @@ export class AuthService {
         }
 
         async logout(token: string): Promise<void> {
+                //* Se obtiene el usuario del token antes de invalidarlo...
+                const payload = this.jwtService.decode(token) as JWTPayload;
+                const user = await this.userService.findUserByID(payload.sub);
+
+                if (user) {
+                        //* Finalizar la sesión del usuario...
+                        const sessionData = {
+                                dni: user.dni,
+                                finalDate: new Date().toISOString(),
+                                finalHour: new Date().toLocaleTimeString(),
+                        };
+
+                        try {
+                                await this.userServiceSession.endSession(
+                                        sessionData,
+                                );
+                        } catch (error) {
+                                console.error(
+                                        'Error ending user session:',
+                                        error,
+                                );
+                                // throw new UnauthorizedException(
+                                //         'Error ending session...',
+                                // );
+                        }
+                }
+
+                //* Se invalida el token del usuario...
                 await this.tokenBlacklist.addToBlacklist(token);
         }
 }
