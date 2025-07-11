@@ -20,7 +20,6 @@ import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Permissions } from '../../../../core/permissions/permissions.decorator';
 import { PermissionsGuard } from '../../../../auth/guards/permissions.guard';
 import { plainToInstance } from 'class-transformer';
-import { rootCertificates } from 'tls';
 
 @Controller('api/users')
 export class UserController {
