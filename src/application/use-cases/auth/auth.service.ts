@@ -67,7 +67,7 @@ export class AuthService {
 
         async logout(token: string): Promise<void> {
                 //* Se obtiene el usuario del token antes de invalidarlo...
-                const payload = this.jwtService.decode(token) as JWTPayload;
+                const payload = this.jwtService.decode(token);
                 const user = await this.userService.findUserByID(payload.sub);
 
                 if (user) {
